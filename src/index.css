@@ -1,24 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  /* Design System: Build Something Wonderful */
+  /* Font Family - Using Inter as fallback for lastik */
+  --font-family-primary: 'Inter', lastik, system-ui, sans-serif;
+  --font-sans: var(--font-family-primary);
+  
+  /* Typography Scale from Design.md */
+  --font-size-xs: 16px;
+  --font-size-sm: 17px;
+  --font-size-md: 18px;
+  --font-size-lg: 20px;
+  --font-size-xl: 30px;
+  --font-size-2xl: 32px;
+  --font-size-3xl: 36px;
+  --font-size-4xl: 50px;
+  
+  --font-size-base: 17px;
+  --font-weight-base: 400;
+  --font-line-height-base: 26px;
 
-  /* Sophisticated, OKLCH-based color palette (Hue 260 - cool technical blue/indigo) */
+  /* Color Palette from Design.md - OKLAB based */
+  --color-text-primary: oklab(0 0 0 / 0.7);
+  --color-surface-base: #000000;
+  --color-text-tertiary: #171717;
+  --color-surface-muted: #ffffff;
+  --color-surface-raised: #197dd8;
+  --color-surface-strong: oklab(0.999994 0.0000455678 0.0000200868 / 0.25);
+
+  /* Extended palette for compatibility */
   --color-indigo-50: oklch(0.97 0.02 260);
   --color-indigo-100: oklch(0.94 0.04 260);
   --color-indigo-200: oklch(0.88 0.08 260);
   --color-indigo-300: oklch(0.80 0.12 260);
   --color-indigo-400: oklch(0.70 0.16 260);
   --color-indigo-500: oklch(0.60 0.20 260);
-  --color-indigo-600: oklch(0.52 0.22 260); /* Primary action color */
+  --color-indigo-600: var(--color-surface-raised);
   --color-indigo-700: oklch(0.44 0.18 260);
   --color-indigo-800: oklch(0.36 0.14 260);
   --color-indigo-900: oklch(0.28 0.10 260);
-  --color-indigo-950: oklch(0.20 0.06 260);
 
-  /* Tinted neutrals - never pure gray */
   --color-slate-50: oklch(0.985 0.005 260);
   --color-slate-100: oklch(0.965 0.008 260);
   --color-slate-200: oklch(0.93 0.01 260);
@@ -26,35 +48,47 @@
   --color-slate-400: oklch(0.75 0.02 260);
   --color-slate-500: oklch(0.60 0.025 260);
   --color-slate-600: oklch(0.50 0.02 260);
-  --color-slate-700: oklch(0.40 0.015 260);
+  --color-slate-700: var(--color-text-tertiary);
   --color-slate-800: oklch(0.30 0.01 260);
   --color-slate-900: oklch(0.20 0.005 260);
-  --color-slate-950: oklch(0.12 0.005 260);
 
-  --color-navy: oklch(0.18 0.01 260); /* Deep tinted background */
+  --color-navy: var(--color-surface-base);
+  --color-white: var(--color-surface-muted);
 
-  /* Legacy variable mappings to maintain compatibility */
-  --color-mist: var(--color-slate-400);
-  --color-ice: var(--color-slate-50);
+  /* Spacing Scale from Design.md */
+  --space-1: 10px;
+  --space-2: 20px;
+  --space-3: 32px;
+  --space-4: 40px;
+  --space-5: 48px;
+  --space-6: 96px;
+  --space-7: 348.4px;
 
-  /* Type Scale (1.25 ratio) */
-  --text-xs: 0.75rem;     /* 12px */
-  --text-sm: 0.875rem;    /* 14px */
-  --text-base: 1rem;      /* 16px */
-  --text-lg: 1.25rem;     /* 20px */
-  --text-xl: 1.563rem;    /* 25px */
-  --text-2xl: 1.953rem;   /* 31px */
-  --text-3xl: 2.441rem;   /* 39px */
-  --text-4xl: 3.052rem;   /* 49px */
+  /* Radius from Design.md */
+  --radius-xs: 26843500px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
 
-  /* Fluid Display Scale */
-  --text-display-sm: clamp(2.441rem, 5vw, 3.815rem);
-  --text-display-lg: clamp(3.815rem, 10vw, 8rem);
+  /* Shadow from Design.md */
+  --shadow-1: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
+  --shadow-soft: var(--shadow-1);
 
-  --shadow-soft: 0 1px 2px rgba(0,0,0,0.02), 0 4px 12px rgba(0,0,0,0.03);
+  /* Motion from Design.md */
+  --motion-duration-instant: 150ms;
+  --motion-duration-fast: 200ms;
+  --motion-duration-normal: 300ms;
 
-  --animate-marquee: marquee 60s linear infinite;
-  --animate-float: float 4s ease-in-out infinite;
+  /* Legacy mappings */
+  --text-xs: var(--font-size-xs);
+  --text-sm: var(--font-size-sm);
+  --text-base: var(--font-size-base);
+  --text-lg: var(--font-size-lg);
+  --text-xl: var(--font-size-xl);
+  --text-2xl: var(--font-size-2xl);
+  --text-3xl: var(--font-size-3xl);
+  --text-4xl: var(--font-size-4xl);
+  --text-display-sm: clamp(var(--font-size-3xl), 5vw, var(--font-size-4xl));
+  --text-display-lg: clamp(var(--font-size-4xl), 10vw, 8rem);
 }
 
 @keyframes marquee {
@@ -70,45 +104,102 @@
 @layer base {
   body {
     @apply bg-white text-navy font-sans antialiased;
-    /* Tinted neutral background */
-    background-color: oklch(0.99 0.005 260);
-    line-height: 1.5;
+    background-color: var(--color-surface-muted);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-base);
+    line-height: var(--font-line-height-base);
   }
 
   h1, h2, h3, h4 {
-    @apply tracking-tighter text-navy font-extrabold;
-    line-height: 1.05;
+    @apply tracking-tight text-navy font-bold;
+    line-height: 1.2;
     text-wrap: balance;
+  }
+
+  /* Accessibility: Focus-visible states required */
+  *:focus-visible {
+    outline: 2px solid var(--color-surface-raised);
+    outline-offset: 2px;
+  }
+
+  /* Keyboard navigation support */
+  button, a, input, textarea, select {
+    &:focus-visible {
+      outline: 2px solid var(--color-surface-raised);
+      outline-offset: 2px;
+    }
   }
 }
 
-/* Modern Technical Refinement */
-.border-thin {
-  @apply border border-slate-200/60;
+/* Component States - All interactive elements must define these */
+.btn {
+  transition: all var(--motion-duration-fast) ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-surface-raised);
+    outline-offset: 2px;
+  }
 }
 
-/* Precision Elements */
+/* Semantic Tokens */
 .mono-label {
-  @apply font-mono text-[10px] uppercase tracking-[0.15em] text-indigo-600 font-bold;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-surface-raised);
+  font-weight: 700;
 }
+
+/* Spacing using semantic tokens */
+.space-1 { padding: var(--space-1); }
+.space-2 { padding: var(--space-2); }
+.space-3 { padding: var(--space-3); }
+.space-4 { padding: var(--space-4); }
+.space-5 { padding: var(--space-5); }
+.space-6 { padding: var(--space-6); }
 
 /* Readability Containers */
 .prose-measure {
   max-width: 65ch;
 }
 
-/* Remove AI Slop */
-.glass {
-  @apply bg-white border border-slate-200 shadow-soft;
+/* Surface Tokens */
+.surface-base {
+  background-color: var(--color-surface-base);
 }
 
-.mesh-gradient, .mesh-gradient::after {
-  display: none;
+.surface-muted {
+  background-color: var(--color-surface-muted);
 }
 
-/* Hover States */
-.hover-lift {
-  @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-slate-300;
+.surface-raised {
+  background-color: var(--color-surface-raised);
+}
+
+.surface-strong {
+  background-color: var(--color-surface-strong);
+}
+
+/* Shadow Token */
+.shadow-1 {
+  box-shadow: var(--shadow-1);
 }
 
 /* Lenis Smooth Scroll Styles */
@@ -122,6 +213,15 @@ html.lenis {
 
 .lenis.lenis-stopped {
   overflow: hidden;
+}
+
+/* Accessibility: Ensure sufficient contrast */
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-tertiary {
+  color: var(--color-text-tertiary);
 }
 
 

@@ -202,21 +202,50 @@ const Header = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-[100] transition-all duration-200 ${isScrolled ? "bg-white/90 backdrop-blur-md border-b border-slate-200/60" : "bg-transparent"}`}>
-      <div className="max-w-[1280px] mx-auto px-6 h-[72px] flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="text-lg font-black tracking-tighter text-navy uppercase">BeyondCareer</span>
+    <nav 
+      className={`fixed top-0 w-full z-[100] transition-all ${isScrolled ? "bg-white/90 backdrop-blur-md border-b border-slate-200/60" : "bg-transparent"}`}
+      style={{ transitionDuration: 'var(--motion-duration-fast)' }}
+      role="navigation"
+      aria-label="Main navigation"
+    >
+      <div className="max-w-[1280px] mx-auto h-[72px] flex items-center justify-between" style={{ paddingLeft: 'var(--space-3)', paddingRight: 'var(--space-3)' }}>
+        <div className="flex items-center" style={{ gap: 'var(--space-1)' }}>
+          <span className="font-black tracking-tight text-navy uppercase" style={{ fontSize: 'var(--font-size-md)' }}>BeyondCareer</span>
         </div>
-        <div className="hidden lg:flex items-center gap-10">
+        <div className="hidden lg:flex items-center" style={{ gap: 'var(--space-4)' }}>
           {navItems.map((item) => (
-            <a key={item.name} href={item.href} className="text-[11px] font-bold text-slate-500 hover:text-indigo-600 uppercase tracking-widest transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">{item.name}</a>
+            <a 
+              key={item.name} 
+              href={item.href} 
+              className="font-bold text-slate-500 hover:text-indigo-600 uppercase tracking-widest transition-colors"
+              style={{ fontSize: 'var(--font-size-xs)', transitionDuration: 'var(--motion-duration-fast)' }}
+            >
+              {item.name}
+            </a>
           ))}
         </div>
-        <div className="hidden lg:flex items-center gap-4">
-          <a href="#pricing" className="px-5 py-2.5 bg-navy text-white hover:bg-indigo-700 font-bold text-[11px] uppercase tracking-widest transition-all rounded-sm shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">Enroll Now</a>
+        <div className="hidden lg:flex items-center" style={{ gap: 'var(--space-2)' }}>
+          <a 
+            href="#pricing" 
+            className="bg-navy text-white hover:bg-indigo-700 font-bold uppercase tracking-widest transition-all shadow-1 btn"
+            style={{ 
+              padding: 'var(--space-1) var(--space-2)', 
+              fontSize: 'var(--font-size-xs)',
+              borderRadius: 'var(--radius-sm)',
+              transitionDuration: 'var(--motion-duration-fast)'
+            }}
+          >
+            Enroll Now
+          </a>
         </div>
-        <button className="lg:hidden p-2 text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-sm" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        <button 
+          className="lg:hidden text-navy"
+          style={{ padding: 'var(--space-1)', borderRadius: 'var(--radius-sm)' }}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-expanded={isMenuOpen}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
         </button>
       </div>
     </nav>
@@ -225,26 +254,34 @@ const Header = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-navy text-white py-20">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
-          <div className="space-y-6">
-            <span className="text-lg font-black tracking-tighter text-white uppercase">BeyondCareer</span>
-            <p className="text-sm text-slate-400 font-medium tracking-tight">Precision-engineered for strategic minds.</p>
+    <footer className="bg-navy text-white" style={{ paddingTop: 'var(--space-6)', paddingBottom: 'var(--space-6)' }} role="contentinfo">
+      <div className="max-w-7xl mx-auto" style={{ paddingLeft: 'var(--space-3)', paddingRight: 'var(--space-3)' }}>
+        <div className="grid grid-cols-1 md:grid-cols-4" style={{ gap: 'var(--space-6)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+            <span className="font-black tracking-tight text-white uppercase" style={{ fontSize: 'var(--font-size-md)' }}>BeyondCareer</span>
+            <p className="text-slate-400 font-medium tracking-tight" style={{ fontSize: 'var(--font-size-sm)' }}>Precision-engineered for strategic minds.</p>
           </div>
-          <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-12">
+          <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-3" style={{ gap: 'var(--space-5)' }}>
             {["Quick Links", "Resources", "Connect"].map(title => (
               <div key={title}>
-                <h3 className="font-bold text-[11px] mb-6 uppercase tracking-widest text-slate-400">{title}</h3>
-                <ul className="space-y-4">
-                  {["Home", "FAQ", "Community", "Privacy"].map(link => <li key={link} className="text-slate-500 text-xs font-medium cursor-pointer hover:text-white transition-colors">{link}</li>)}
+                <h3 className="font-bold uppercase tracking-widest text-slate-400" style={{ fontSize: 'var(--font-size-xs)', marginBottom: 'var(--space-3)' }}>{title}</h3>
+                <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+                  {["Home", "FAQ", "Community", "Privacy"].map(link => (
+                    <li key={link}>
+                      <a href="#" className="text-slate-500 font-medium cursor-pointer hover:text-white transition-colors" style={{ fontSize: 'var(--font-size-xs)', transitionDuration: 'var(--motion-duration-fast)' }}>
+                        {link}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
             ))}
           </div>
         </div>
-        <div className="mt-20 h-px w-full bg-white/5" />
-        <div className="mt-8 text-[11px] font-bold uppercase tracking-widest text-slate-600">Copyright © {new Date().getFullYear()} Beyond Career Pvt Ltd.</div>
+        <div className="w-full bg-white/5" style={{ height: '1px', marginTop: 'var(--space-6)', marginBottom: 'var(--space-3)' }} />
+        <div className="font-bold uppercase tracking-widest text-slate-600" style={{ fontSize: 'var(--font-size-xs)' }}>
+          Copyright © {new Date().getFullYear()} Beyond Career Pvt Ltd.
+        </div>
       </div>
     </footer>
   );
@@ -254,30 +291,52 @@ const ModuleAccordion = ({ mod }: { mod: WeekModule }) => {
   const [isOpen, setIsOpen] = useState(false);
   const contentId = `module-content-${mod.week}`;
   return (
-    <div className={`relative mb-4`}>
-       <div className={`bg-white border transition-all duration-200 overflow-hidden ${isOpen ? 'border-indigo-200 shadow-soft' : 'border-slate-200/60 hover:border-slate-300'}`}>
+    <div className="relative" style={{ marginBottom: 'var(--space-2)' }}>
+       <div 
+         className={`bg-white border transition-all overflow-hidden ${isOpen ? 'border-indigo-200 shadow-1' : 'border-slate-200/60 hover:border-slate-300'}`}
+         style={{ transitionDuration: 'var(--motion-duration-fast)' }}
+       >
          <button 
            onClick={() => setIsOpen(!isOpen)}
            aria-expanded={isOpen}
            aria-controls={contentId}
-           className="w-full p-8 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-inset"
+           className="w-full flex items-center justify-between text-left"
+           style={{ padding: 'var(--space-3)' }}
          >
-           <div className="flex items-center gap-6">
-             <div className={
-               isOpen 
-                 ? "w-12 h-12 flex items-center justify-center font-bold text-sm transition-all bg-indigo-600 text-white" 
-                 : "w-12 h-12 flex items-center justify-center font-bold text-sm transition-all bg-slate-50 text-slate-400"
-             }>
-               <span className="font-mono text-[11px]">W{mod.week}</span>
+           <div className="flex items-center" style={{ gap: 'var(--space-3)' }}>
+             <div 
+               className={`flex items-center justify-center font-bold transition-all ${isOpen ? 'bg-indigo-600 text-white' : 'bg-slate-50 text-slate-400'}`}
+               style={{ 
+                 width: 'var(--space-5)', 
+                 height: 'var(--space-5)',
+                 fontSize: 'var(--font-size-xs)',
+                 transitionDuration: 'var(--motion-duration-fast)'
+               }}
+             >
+               <span style={{ fontFamily: 'monospace' }}>W{mod.week}</span>
              </div>
              <div>
-               <p className={`font-mono text-[10px] uppercase tracking-wider mb-1 ${isOpen ? 'text-navy' : 'text-slate-400'}`}>Week {mod.week}</p>
-               <h3 className="text-lg font-bold uppercase tracking-tight text-navy">{mod.title}</h3>
+               <p 
+                 className={`uppercase tracking-wider ${isOpen ? 'text-navy' : 'text-slate-400'}`}
+                 style={{ fontSize: 'var(--font-size-xs)', marginBottom: 'var(--space-1)' }}
+               >
+                 Week {mod.week}
+               </p>
+               <h3 className="font-bold uppercase tracking-tight text-navy" style={{ fontSize: 'var(--font-size-md)' }}>
+                 {mod.title}
+               </h3>
              </div>
            </div>
            
-           <div className={`w-10 h-10 border flex items-center justify-center transition-all ${isOpen ? 'bg-navy border-navy rotate-45' : 'bg-white border-slate-200'}`}>
-             <Plus className={`w-4 h-4 ${isOpen ? 'text-white' : 'text-slate-400'}`} aria-hidden="true" />
+           <div 
+             className={`border flex items-center justify-center transition-all ${isOpen ? 'bg-navy border-navy rotate-45' : 'bg-white border-slate-200'}`}
+             style={{ 
+               width: 'var(--space-4)', 
+               height: 'var(--space-4)',
+               transitionDuration: 'var(--motion-duration-fast)'
+             }}
+           >
+             <Plus className={`${isOpen ? 'text-white' : 'text-slate-400'}`} size={16} aria-hidden="true" />
            </div>
          </button>
 
@@ -285,19 +344,29 @@ const ModuleAccordion = ({ mod }: { mod: WeekModule }) => {
            {isOpen && (
              <motion.div
                id={contentId}
+               role="region"
+               aria-labelledby={`module-button-${mod.week}`}
                initial={{ height: 0, opacity: 0 }}
                animate={{ height: 'auto', opacity: 1 }}
                exit={{ height: 0, opacity: 0 }}
                transition={{ duration: 0.2 }}
              >
-               <div className="px-8 pb-8 pt-0">
-                 <div className="h-px w-full bg-slate-100 mb-6" />
-                 <p className="text-sm text-slate-600 font-medium mb-6 leading-relaxed max-w-2xl">
+               <div style={{ padding: `0 var(--space-3) var(--space-3)` }}>
+                 <div className="w-full bg-slate-100" style={{ height: '1px', marginBottom: 'var(--space-3)' }} />
+                 <p className="text-slate-600 font-medium leading-relaxed max-w-2xl" style={{ fontSize: 'var(--font-size-sm)', marginBottom: 'var(--space-3)' }}>
                    {mod.description}
                  </p>
-                 <div className="flex flex-wrap gap-2">
+                 <div className="flex flex-wrap" style={{ gap: 'var(--space-1)' }}>
                    {mod.topics.map((topic, i) => (
-                     <div key={i} className="px-3 py-1 bg-slate-50 text-slate-600 text-[10px] font-bold uppercase tracking-wider border border-slate-200/60 flex items-center gap-2">
+                     <div 
+                       key={i} 
+                       className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider border border-slate-200/60 flex items-center"
+                       style={{ 
+                         padding: 'var(--space-1) calc(var(--space-1) * 1.5)', 
+                         fontSize: 'var(--font-size-xs)',
+                         gap: 'var(--space-1)'
+                       }}
+                     >
                        {topic}
                      </div>
                    ))}
@@ -314,20 +383,34 @@ const ModuleAccordion = ({ mod }: { mod: WeekModule }) => {
 const FAQAccordion = ({ item, isOpen, onClick, index }: { item: FAQItem, isOpen: boolean, onClick: () => void, index: number }) => {
   const contentId = `faq-content-${index}`;
   return (
-    <div className={`relative mb-4`}>
-       <div className={`bg-white border transition-all duration-200 overflow-hidden ${isOpen ? 'border-indigo-200 shadow-soft' : 'border-slate-200/60 hover:border-slate-300'}`}>
+    <div className="relative" style={{ marginBottom: 'var(--space-2)' }}>
+       <div 
+         className={`bg-white border transition-all overflow-hidden ${isOpen ? 'border-indigo-200 shadow-1' : 'border-slate-200/60 hover:border-slate-300'}`}
+         style={{ transitionDuration: 'var(--motion-duration-fast)' }}
+       >
          <button 
            onClick={onClick}
            aria-expanded={isOpen}
            aria-controls={contentId}
-           className="w-full p-6 md:p-8 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-inset"
+           className="w-full flex items-center justify-between text-left"
+           style={{ padding: 'var(--space-3)' }}
          >
-           <span className={`font-bold text-sm uppercase tracking-tight transition-colors ${isOpen ? 'text-indigo-600' : 'text-navy group-hover:text-indigo-500'}`}>
+           <span 
+             className={`font-bold uppercase tracking-tight transition-colors ${isOpen ? 'text-indigo-600' : 'text-navy'}`}
+             style={{ fontSize: 'var(--font-size-sm)', transitionDuration: 'var(--motion-duration-fast)' }}
+           >
              {item.question}
            </span>
            
-           <div className={`w-8 h-8 md:w-10 md:h-10 border flex items-center justify-center transition-all ${isOpen ? 'bg-navy border-navy rotate-45' : 'bg-white border-slate-200'}`}>
-             <Plus className={`w-3 h-3 md:w-4 md:h-4 ${isOpen ? 'text-white' : 'text-slate-400'}`} aria-hidden="true" />
+           <div 
+             className={`border flex items-center justify-center transition-all ${isOpen ? 'bg-navy border-navy rotate-45' : 'bg-white border-slate-200'}`}
+             style={{ 
+               width: 'var(--space-4)', 
+               height: 'var(--space-4)',
+               transitionDuration: 'var(--motion-duration-fast)'
+             }}
+           >
+             <Plus className={`${isOpen ? 'text-white' : 'text-slate-400'}`} size={16} aria-hidden="true" />
            </div>
          </button>
 
@@ -335,14 +418,16 @@ const FAQAccordion = ({ item, isOpen, onClick, index }: { item: FAQItem, isOpen:
            {isOpen && (
              <motion.div
                id={contentId}
+               role="region"
+               aria-labelledby={`faq-button-${index}`}
                initial={{ height: 0, opacity: 0 }}
                animate={{ height: 'auto', opacity: 1 }}
                exit={{ height: 0, opacity: 0 }}
                transition={{ duration: 0.2 }}
              >
-               <div className="px-6 md:px-8 pb-6 md:pb-8 pt-0">
-                 <div className="h-px w-full bg-slate-100 mb-6" />
-                 <p className="text-slate-500 text-sm font-medium leading-relaxed max-w-2xl">
+               <div style={{ padding: `0 var(--space-3) var(--space-3)` }}>
+                 <div className="w-full bg-slate-100" style={{ height: '1px', marginBottom: 'var(--space-3)' }} />
+                 <p className="text-slate-500 font-medium leading-relaxed max-w-2xl" style={{ fontSize: 'var(--font-size-sm)' }}>
                    {item.answer}
                  </p>
                </div>
@@ -422,46 +507,97 @@ export default function App() {
       <Header />
 
       {/* 1. HERO - High Precision Technical */}
-      <section id="hero" className="relative pt-24 md:pt-32 pb-16 md:pb-20 overflow-hidden">
+      <section id="hero" className="relative overflow-hidden" style={{ paddingTop: 'var(--space-6)', paddingBottom: 'var(--space-6)' }}>
         <motion.div 
           initial="initial"
           animate="animate"
           variants={STAGGER_CONTAINER}
-          className="max-w-[1400px] mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-20"
+          className="max-w-[1400px] mx-auto relative z-10 flex flex-col lg:flex-row items-center"
+          style={{ paddingLeft: 'var(--space-3)', paddingRight: 'var(--space-3)', gap: 'var(--space-5)' }}
         >
           
           <div className="flex-1 text-center lg:text-left w-full">
-            <motion.div variants={FADE_IN} className="inline-flex items-center gap-2 px-3 py-1 mb-8 bg-indigo-50/50 border border-indigo-100 rounded-sm max-w-full overflow-hidden">
-              <div className="flex -space-x-1.5 shrink-0">
+            <motion.div 
+              variants={FADE_IN} 
+              className="inline-flex items-center bg-indigo-50/50 border border-indigo-100 max-w-full overflow-hidden"
+              style={{ 
+                gap: 'var(--space-1)', 
+                padding: 'var(--space-1) calc(var(--space-1) * 1.5)', 
+                marginBottom: 'var(--space-3)',
+                borderRadius: 'var(--radius-sm)'
+              }}
+            >
+              <div className="flex shrink-0" style={{ marginLeft: 'calc(var(--space-1) * -0.75)' }}>
                 {[MENTORS[0], MENTORS[1], MENTORS[2]].map((m, i) => (
-                  <img key={i} src={m.image} className="w-5 h-5 rounded-full border border-indigo-50 object-cover" alt="Mentor" />
+                  <img 
+                    key={i} 
+                    src={m.image} 
+                    className="border border-indigo-50 object-cover" 
+                    style={{ 
+                      width: 'var(--space-2)', 
+                      height: 'var(--space-2)', 
+                      borderRadius: 'var(--radius-xs)' 
+                    }}
+                    alt="Mentor" 
+                  />
                 ))}
               </div>
-              <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-indigo-700 font-bold truncate"><Counter to={600} duration={1.5} />+ Strategy Leaders Joined</span>
+              <span className="font-bold uppercase tracking-widest text-indigo-700 truncate" style={{ fontSize: 'var(--font-size-xs)' }}>
+                <Counter to={600} duration={1.5} />+ Strategy Leaders Joined
+              </span>
             </motion.div>
 
-            <motion.h1 variants={FADE_IN} className="text-display-lg font-black text-navy tracking-tighter leading-[0.85] mb-6 md:mb-8 uppercase">
+            <motion.h1 
+              variants={FADE_IN} 
+              className="font-black text-navy tracking-tight leading-[0.85] uppercase"
+              style={{ fontSize: 'var(--text-display-lg)', marginBottom: 'var(--space-3)' }}
+            >
               Master<br />
               Strategic<br />
               Logic
             </motion.h1>
 
-            <motion.p variants={FADE_IN} className="text-base md:text-lg font-medium text-slate-500 mb-8 md:mb-10 prose-measure leading-relaxed text-balance mx-auto lg:mx-0">
+            <motion.p 
+              variants={FADE_IN} 
+              className="font-medium text-slate-500 prose-measure leading-relaxed text-balance mx-auto lg:mx-0"
+              style={{ fontSize: 'var(--font-size-md)', marginBottom: 'var(--space-4)' }}
+            >
               A 5-week high-performance intensive designed to decode the internal logic of MBB strategy firms.
             </motion.p>
 
-            <motion.div variants={FADE_IN} className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-3 w-full sm:w-auto">
-              <a href="#pricing" className="w-full sm:w-auto px-8 py-4 bg-navy text-white font-bold uppercase tracking-widest text-[11px] rounded-sm shadow-soft hover:bg-indigo-700 transition-all text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
+            <motion.div 
+              variants={FADE_IN} 
+              className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start w-full sm:w-auto"
+              style={{ gap: 'var(--space-2)' }}
+            >
+              <a 
+                href="#pricing" 
+                className="w-full sm:w-auto bg-navy text-white font-bold uppercase tracking-widest shadow-1 text-center btn"
+                style={{ 
+                  padding: 'var(--space-2) var(--space-3)', 
+                  fontSize: 'var(--font-size-xs)',
+                  borderRadius: 'var(--radius-sm)'
+                }}
+              >
                 Apply Now
               </a>
-              <a href="#" className="w-full sm:w-auto px-8 py-4 border border-slate-200 text-navy font-bold uppercase tracking-widest text-[11px] rounded-sm hover:bg-indigo-50/50 transition-all text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
+              <a 
+                href="#" 
+                className="w-full sm:w-auto border border-slate-200 text-navy font-bold uppercase tracking-widest hover:bg-indigo-50/50 transition-all text-center btn"
+                style={{ 
+                  padding: 'var(--space-2) var(--space-3)', 
+                  fontSize: 'var(--font-size-xs)',
+                  borderRadius: 'var(--radius-sm)',
+                  transitionDuration: 'var(--motion-duration-fast)'
+                }}
+              >
                 Syllabus
               </a>
             </motion.div>
           </div>
 
           {/* Right: Clean Grid Visual */}
-          <div className="flex-1 w-full grid grid-cols-2 gap-2 sm:gap-4 h-[300px] sm:h-[400px] md:h-[500px]">
+          <div className="flex-1 w-full grid grid-cols-2 h-[300px] sm:h-[400px] md:h-[500px]" style={{ gap: 'var(--space-2)' }}>
              {[
                "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600",
                "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=600",
@@ -471,9 +607,15 @@ export default function App() {
                <motion.div 
                  key={i} 
                  variants={FADE_IN}
-                 className={`rounded-sm overflow-hidden border border-slate-200/60 shadow-sm bg-navy ${i % 2 === 1 ? 'translate-y-4 sm:translate-y-8' : ''}`}
+                 className={`overflow-hidden border border-slate-200/60 shadow-1 bg-navy ${i % 2 === 1 ? 'translate-y-4 sm:translate-y-8' : ''}`}
+                 style={{ borderRadius: 'var(--radius-sm)' }}
                >
-                 <img src={img} className="w-full h-full object-cover mix-blend-luminosity opacity-70 hover:opacity-90 transition-opacity duration-500" alt="Consulting" />
+                 <img 
+                   src={img} 
+                   className="w-full h-full object-cover mix-blend-luminosity opacity-70 hover:opacity-90 transition-opacity" 
+                   style={{ transitionDuration: '500ms' }}
+                   alt="Consulting" 
+                 />
                </motion.div>
              ))}
           </div>
